@@ -1,5 +1,4 @@
-import { playlistData } from '../data/playlist.js';
-import { togglePlaylistSong, addAudioListener } from '../components/audioController.js';
+import { toggleGlobalPlay, isPlaying, addAudioListener } from '../components/audioController.js';
 
 export function initPlaylist(containerId) {
   const container = document.getElementById(containerId);
@@ -7,124 +6,62 @@ export function initPlaylist(containerId) {
 
   container.className = 'fade-up';
 
-  const playlistHtml = playlistData
-    .map(song => `
-      <div class="playlist-item" data-id="${song.id}">
-        <div class="playlist-info">
-          <div class="playlist-icon-container">
-            <div class="playlist-icon-circle">
-              <!-- Default state icon (Music Note) -->
-              <svg class="music-note-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 18V5l12-2v13"></path>
-                <circle cx="6" cy="18" r="3"></circle>
-                <circle cx="18" cy="16" r="3"></circle>
-              </svg>
-              <!-- Playing state equalizer -->
-              <div class="equalizer" style="display: none;">
-                <span class="eq-bar bar-1"></span>
-                <span class="eq-bar bar-2"></span>
-                <span class="eq-bar bar-3"></span>
-              </div>
-            </div>
-            <!-- Play hover overlay button -->
-            <button class="playlist-play-btn" aria-label="Play song">
-              <svg class="item-play-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6 4 20 12 6 20 6 4"></polygon>
-              </svg>
-              <svg class="item-pause-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-                <rect x="5" y="4" width="4" height="16"></rect>
-                <rect x="15" y="4" width="4" height="16"></rect>
-              </svg>
-            </button>
-          </div>
-          <div class="playlist-meta">
-            <h4>${song.title}</h4>
-            <p>${song.artist}</p>
-          </div>
-        </div>
-        
-        <div class="playlist-actions">
-          ${song.spotifyUrl ? `
-            <a href="${song.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="playlist-link" title="Buka di Spotify">
-              <span>Spotify</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          ` : ''}
-        </div>
-      </div>
-    `)
-    .join('');
-
   container.innerHTML = `
     <div class="container">
-      <h2 class="section-title">Playlist Favorit Kita</h2>
-      <p class="section-subtitle">Kumpulan lagu yang menemani hari-hari kita, mewakili rasa, dan selalu mengingatkan kita satu sama lain.</p>
-      
-      <div class="playlist-container glass-card" style="margin: 0 auto;">
-        <div class="playlist-list">
-          ${playlistHtml}
+      <div class="section-header">
+        <div class="section-badge">BACKSOUND</div>
+        <h2 class="section-title">Musik Perjalanan</h2>
+        <p class="section-subtitle">Lagu yang menemani setiap momen perjalanan kita.</p>
+      </div>
+
+      <div class="corp-card soundtrack-table-card">
+        <div class="soundtrack-list">
+          <div class="soundtrack-item" id="bermuara-track">
+            <div class="soundtrack-info">
+              <button class="soundtrack-play-btn" id="bermuara-play-btn" aria-label="Putar Bermuara">
+                <svg class="play-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <div class="soundtrack-eq" style="display: none;">
+                  <span class="eq-bar"></span>
+                  <span class="eq-bar"></span>
+                  <span class="eq-bar"></span>
+                </div>
+              </button>
+              <div class="soundtrack-meta">
+                <h4>Bermuara</h4>
+                <p>Rizky Febian ft Mahalini</p>
+              </div>
+            </div>
+
+            <div style="font-size: 0.85rem; color: var(--muted-text); font-weight: 600;">
+              LAGU #01
+            </div>
+          </div>
         </div>
       </div>
     </div>
   `;
 
-  // Attach event listeners to playlist items
-  const items = container.querySelectorAll('.playlist-item');
-  items.forEach(item => {
-    const songId = parseInt(item.getAttribute('data-id'));
-    const playBtn = item.querySelector('.playlist-play-btn');
-    
-    // Play on clicking the play button
-    playBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      togglePlaylistSong(songId);
-    });
+  const trackItem = document.getElementById('bermuara-track');
+  const playSvg = trackItem.querySelector('.play-svg');
+  const eq = trackItem.querySelector('.soundtrack-eq');
 
-    // Also play when clicking the item card for a more intuitive mobile experience
-    item.addEventListener('click', () => {
-      togglePlaylistSong(songId);
-    });
+  trackItem.addEventListener('click', () => {
+    toggleGlobalPlay();
   });
 
-  // Listen to audioController changes to update the play/pause icons and card classes in the UI
   addAudioListener((state) => {
-    items.forEach(item => {
-      const songId = parseInt(item.getAttribute('data-id'));
-      const isActive = state.activeSong && state.activeSong !== 'bg' && state.activeSong.id === songId;
-      const isSongPlaying = isActive && state.isPlaying;
+    const playing = state.isPlaying;
 
-      const noteIcon = item.querySelector('.music-note-icon');
-      const equalizer = item.querySelector('.equalizer');
-      const playIcon = item.querySelector('.item-play-svg');
-      const pauseIcon = item.querySelector('.item-pause-svg');
-
-      if (isActive) {
-        item.classList.add('active');
-        if (isSongPlaying) {
-          item.classList.add('playing');
-          noteIcon.style.display = 'none';
-          equalizer.style.display = 'flex';
-          playIcon.style.display = 'none';
-          pauseIcon.style.display = 'block';
-        } else {
-          item.classList.remove('playing');
-          noteIcon.style.display = 'block';
-          equalizer.style.display = 'none';
-          playIcon.style.display = 'block';
-          pauseIcon.style.display = 'none';
-        }
-      } else {
-        item.classList.remove('active');
-        item.classList.remove('playing');
-        noteIcon.style.display = 'block';
-        equalizer.style.display = 'none';
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-      }
-    });
+    if (playing) {
+      trackItem.classList.add('active', 'playing');
+      if (playSvg) playSvg.style.display = 'none';
+      if (eq) eq.style.display = 'flex';
+    } else {
+      trackItem.classList.remove('active', 'playing');
+      if (playSvg) playSvg.style.display = 'block';
+      if (eq) eq.style.display = 'none';
+    }
   });
 }

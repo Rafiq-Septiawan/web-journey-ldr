@@ -2,19 +2,20 @@ export const lettersData = [
   {
     id: 1,
     date: "14 Februari 2025",
-    subject: "Tentang Jarak dan Waktu",
-    content: "Hai sayang, hari ini tepat beberapa bulan sejak kita memutuskan untuk berjuang bersama. Aku tahu, LDR ini tidak mudah. Ada kalanya aku ingin sekali ada di sampingmu saat kamu lelah dengan hari-harimu. Tapi ingatlah, setiap kilometer yang memisahkan kita saat ini sedang menenun cerita indah untuk masa depan kita. Terima kasih telah bertahan dan terus percaya. Aku mencintaimu, selalu."
+    subject: "Komitmen dan Jarak",
+    content: "Hari ini menjadi pengingat akan keputusan yang kita ambil untuk melangkah bersama dalam hubungan jarak jauh ini. Membangun komunikasi yang konsisten dan saling mendukung di tengah kesibukan masing-masing di Kota Tangerang dan Pasaman Barat adalah fondasi utama kita. Terima kasih telah menjaga kepercayaan dan terus bertumbuh bersama."
   },
   {
     id: 2,
     date: "05 Juni 2025",
-    subject: "Saat Rindu Terasa Berat",
-    content: "Malam ini bintang-bintang terlihat sangat terang di langit tempatku berada. Aku memandanginya dan bertanya-tanya, apakah kamu juga sedang menatap langit yang sama? Di saat-saat rindu terasa menyesakkan dada seperti ini, aku selalu memutar kembali rekaman suara dan tawamu di ponselku. Itu sudah cukup untuk membuatku tersenyum kembali. Jaga kesehatanmu di sana ya."
+    subject: "Catatan Komunikasi & Evaluasi Perjalanan",
+    content: "Menjalani rutinitas harian dengan perbedaan lokasi mengajarkan kita arti penting dari keterbukaan dan rasa saling menghargai waktu. Di antara panggilan suara singkat dan pesan singkat malam hari, kita belajar bahwa kualitas komunikasi jauh lebih berharga daripada sekadar frekuensi."
   },
   {
     id: 3,
     date: "01 Januari 2026",
-    subject: "Resolusi Tahun Baru Kita",
-    content: "Selamat Tahun Baru! Tahun ini, impian terbesarku adalah agar kita bisa mengurangi frekuensi ucapan 'sampai jumpa lagi' dan memperbanyak momen kebersamaan yang nyata. Mari kita terus saling menguatkan, merayakan pencapaian-pencapaian kecil, dan terus melangkah menuju mimpi-mimpi besar yang telah kita susun bersama. Aku sangat bersyukur memilikimu di hidupku."
+    subject: "Refleksi dan Target Bersama",
+    content: "Memasuki tahun yang baru, kita melihat kembali pencapaian dan tantangan yang telah dilalui. Target utama kita tetap jelas: menyelesaikan setiap tahapan perjalanan ini dengan baik dan melangkah lebih dekat menuju tujuan bersama."
   }
 ];
+

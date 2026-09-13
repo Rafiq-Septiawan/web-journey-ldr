@@ -6,24 +6,36 @@ export function initDreams(containerId) {
 
   container.className = 'fade-up';
 
-  const dreamsHtml = dreamsData
-    .map(dream => `
-      <div class="dream-card glass-card">
-        <div class="dream-icon">${dream.icon}</div>
-        <h3>${dream.title}</h3>
-        <p>${dream.description}</p>
-      </div>
-    `)
+  const roadmapItemsHtml = dreamsData
+    .map((dream) => {
+      const categoryLabel = dream.category || 'Rencana Perjalanan';
+      return `
+        <div class="corp-card roadmap-card">
+          <div class="roadmap-card-header">
+            <div class="roadmap-icon-box">${dream.icon}</div>
+            <div>
+              <span class="roadmap-category-tag">${categoryLabel}</span>
+              <h3>${dream.title}</h3>
+            </div>
+          </div>
+          <p>${dream.description}</p>
+        </div>
+      `;
+    })
     .join('');
 
   container.innerHTML = `
     <div class="container">
-      <h2 class="section-title">Harapan & Rencana Masa Depan</h2>
-      <p class="section-subtitle">Daftar mimpi dan rencana yang ingin kita wujudkan bersama setelah jarak tidak lagi menjadi penghalang.</p>
-      
-      <div class="dreams-grid">
-        ${dreamsHtml}
+      <div class="section-header">
+        <div class="section-badge">PETA JALAN STRATEGIS</div>
+        <h2 class="section-title">Rencana Masa Depan</h2>
+        <p class="section-subtitle">Peta jalan dan target strategis yang disusun berdasarkan tahap waktu perancangan.</p>
+      </div>
+
+      <div class="roadmap-grid">
+        ${roadmapItemsHtml}
       </div>
     </div>
   `;
 }
+

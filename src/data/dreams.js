@@ -1,32 +1,39 @@
 export const dreamsData = [
   {
-    icon: "✈️",
-    title: "Mengakhiri LDR",
-    description: "Tujuan akhir dan terbesar kita. Berada di satu kota yang sama, menetap di rumah yang hangat, dan tidak perlu lagi menghitung hari untuk berpisah."
-  },
-  {
-    icon: "🏖️",
-    title: "Menjelajahi Dunia Bersama",
-    description: "Mengunjungi destinasi impian kita mulai dari pantai berpasir putih, mendaki gunung, hingga menikmati musim gugur di negeri impian."
-  },
-  {
-    icon: "🏡",
-    title: "Membangun Rumah Impian",
-    description: "Mendesain sudut-sudut rumah impian kita, dengan perpustakaan mini, dapur yang nyaman untuk memasak bersama, dan taman kecil di belakang."
-  },
-  {
-    icon: "🐈",
-    title: "Memelihara Kucing Bersama",
-    description: "Mengadopsi kucing lucu untuk menemani hari-hari kita di rumah baru nanti, memberi mereka nama-nama yang unik dan merawatnya bersama."
-  },
-  {
-    icon: "🍳",
-    title: "Kelas Memasak Berdua",
-    description: "Mengikuti kelas memasak akhir pekan untuk mempelajari hidangan baru, meskipun ujung-ujungnya kita akan menertawakan masakan masing-masing."
-  },
-  {
+    category: "Jangka Pendek",
     icon: "📸",
-    title: "Membuat Scrapbook Fisik",
-    description: "Mencetak semua foto perjalanan kita dan menempelkannya di album fisik, lengkap dengan tiket pesawat, tiket bioskop, dan catatan kecil kita."
+    title: "Dokumentasi Scrapbook Fisik",
+    description: "Mencetak semua momen perjalanan dan menyusunnya dalam cetakan fisik lengkap dengan arsip tiket dan catatan perjalanan."
+  },
+  {
+    category: "Jangka Pendek",
+    icon: "🍳",
+    title: "Kelas Kuliner & Pengalaman Bersama",
+    description: "Menghabiskan waktu perjumpaan dengan mengikuti aktivitas produktif dan mencoba pengalaman baru bersama."
+  },
+  {
+    category: "Jangka Menengah",
+    icon: "🏖️",
+    title: "Eksplorasi Destinasi Perjalanan",
+    description: "Mengunjungi berbagai destinasi impian di tanah air maupun luar negeri saat momen liburan bersama."
+  },
+  {
+    category: "Jangka Menengah",
+    icon: "🐈",
+    title: "Persiapan Ruang Bersama",
+    description: "Merencanakan kebutuhan ruang tinggal bersama dan hal-hal pendukung kenyamanan masa depan."
+  },
+  {
+    category: "Jangka Panjang",
+    icon: "✈️",
+    title: "Menyatukan Dua Lokasi (Puncak LDR)",
+    description: "Target utama untuk tidak lagi terpisah jarak, menetap di satu wilayah yang sama secara permanen."
+  },
+  {
+    category: "Jangka Panjang",
+    icon: "🏡",
+    title: "Membangun Tempat Tinggal Permanen",
+    description: "Mewujudkan rumah impian yang nyaman dengan fasilitas yang dirancang bersama untuk masa depan."
   }
 ];
+

@@ -6,39 +6,33 @@ export function initGallery(containerId) {
 
   container.className = 'fade-up';
 
-  // Create layout variations (wide, tall) periodically for masonry look
-  const galleryItemsHtml = galleryData
-    .map((item, idx) => {
-      let layoutClass = '';
-      if (idx === 1 || idx === 6) {
-        layoutClass = 'tall';
-      } else if (idx === 3 || idx === 4) {
-        layoutClass = 'wide';
-      }
-      return `
-        <div class="gallery-item ${layoutClass}" data-index="${idx}">
-          <img src="${item.src}" alt="${item.caption}" loading="lazy" />
-          <div class="gallery-overlay">
-            <p class="gallery-caption">${item.caption}</p>
-          </div>
+  const docsHtml = galleryData
+    .map((item, idx) => `
+      <div class="doc-item" data-index="${idx}">
+        <img src="${item.src}" alt="${item.caption}" loading="lazy" />
+        <div class="doc-overlay">
+          <p class="doc-caption">${item.caption}</p>
         </div>
-      `;
-    })
+      </div>
+    `)
     .join('');
 
   container.innerHTML = `
     <div class="container">
-      <h2 class="section-title">Galeri Memori</h2>
-      <p class="section-subtitle">Koleksi foto dan potongan cerita visual yang merekam senyuman, tawa, dan kebersamaan kita.</p>
-      
-      <div class="gallery-grid">
-        ${galleryItemsHtml}
+      <div class="section-header">
+        <div class="section-badge">ARSIP VISUAL</div>
+        <h2 class="section-title">Dokumentasi</h2>
+        <p class="section-subtitle">Kumpulan momen yang menjadi bagian dari perjalanan.</p>
+      </div>
+
+      <div class="documentation-grid">
+        ${docsHtml}
       </div>
     </div>
   `;
 
-  // Attach event listeners for Lightbox modal
-  const items = container.querySelectorAll('.gallery-item');
+  // Attach Lightbox triggers
+  const items = container.querySelectorAll('.doc-item');
   items.forEach(item => {
     item.addEventListener('click', () => {
       const idx = item.getAttribute('data-index');
@@ -49,3 +43,4 @@ export function initGallery(containerId) {
     });
   });
 }
+

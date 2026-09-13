@@ -4,8 +4,8 @@ export function initLightbox() {
   lightbox.id = 'lightbox-modal';
   lightbox.innerHTML = `
     <div class="lightbox-content">
-      <button class="lightbox-close" id="lightbox-close">&times;</button>
-      <img src="" alt="Zoomed image" class="lightbox-img" id="lightbox-img" />
+      <button class="lightbox-close" id="lightbox-close" aria-label="Tutup Pratinjau Foto">&times;</button>
+      <img src="" alt="Documentation image preview" class="lightbox-img" id="lightbox-img" />
       <p class="lightbox-caption" id="lightbox-caption"></p>
     </div>
   `;
@@ -18,7 +18,7 @@ export function initLightbox() {
 
   const closeLightbox = () => {
     lightbox.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scroll
+    document.body.style.overflow = '';
   };
 
   closeBtn.addEventListener('click', closeLightbox);
@@ -34,11 +34,10 @@ export function initLightbox() {
     }
   });
 
-  // Export open handler
   window.openLightbox = function(src, caption) {
     imgEl.src = src;
     captionEl.textContent = caption || '';
     lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    document.body.style.overflow = 'hidden';
   };
 }

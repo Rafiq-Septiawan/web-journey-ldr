@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Journey LDR — Kisah Perjalanan Hubungan Kita</title>
+  <title>WEB JOURNEY LDR — Digital Journey & Documentation Platform</title>
   
-  <meta name="description" content="Sebuah dokumentasi perjalanan personal hubungan jarak jauh (LDR), mendokumentasikan cerita, linimasa, galeri memori, surat digital, dan mimpi masa depan bersama.">
-  <meta name="keywords" content="LDR, Long Distance Relationship, Storytelling, Personal Website, Perjalanan Cinta, Surat Digital">
-  <meta name="author" content="Web Journey LDR">
+  <meta name="description" content="WEB JOURNEY LDR — Platform digital terstruktur untuk mendokumentasikan perjalanan, milestone, aktivitas, dan komunikasi dalam hubungan jarak jauh secara profesional.">
+  <meta name="keywords" content="WEB JOURNEY LDR, Digital Journey Platform, Documentation Platform, Milestones, Journey Tracking">
+  <meta name="author" content="WEB JOURNEY LDR">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -15,43 +15,54 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <!-- CSS diimport melalui main.js (Vite best practice) -->
+  <!-- Leaflet CSS for Map Hero -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
 
-  <!-- 1. Opening Screen -->
+  <!-- Hidden opening screen placeholder -->
   <div id="opening-screen"></div>
 
-  <!-- Main Website Container (shown once dismissed) -->
+  <!-- Main Platform Content -->
   <main id="main-content">
-    <!-- 2. Home Section -->
+    <!-- 1. Hero / Home Section -->
     <section id="home"></section>
 
-    <!-- 3. Our Story Section -->
-    <section id="story"></section>
+    <!-- 2. About Section -->
+    <section id="about"></section>
 
-    <!-- 4. Timeline Section -->
+    <!-- 3. Profile Section -->
+    <section id="profile"></section>
+
+    <!-- 4. Our Journey Section -->
+    <section id="journey"></section>
+
+    <!-- 5. Milestones Section -->
     <section id="timeline"></section>
 
-    <!-- 5. Gallery Section -->
+    <!-- 6. Documentation Section -->
     <section id="gallery"></section>
 
-    <!-- 6. Digital Letters Section -->
+    <!-- 7. Communication Archive Section -->
     <section id="letters"></section>
 
-    <!-- 7. Playlist Section -->
+    <!-- 8. Journey Soundtrack Section -->
     <section id="playlist"></section>
 
-    <!-- 8. Future Dreams Section -->
+    <!-- 9. Future Plans Section -->
     <section id="dreams"></section>
 
-    <!-- 9. Closing Section -->
-    <section id="closing"></section>
+    <!-- 10. Contact Section -->
+    <section id="contact"></section>
+
+    <!-- 11. Corporate Footer -->
+    <footer id="closing"></footer>
   </main>
 
+  <!-- Leaflet JS for Map Hero -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLEg=" crossorigin=""></script>
   <!-- Entry Point Script -->
   <script type="module" src="./src/main.js"></script>
 </body>

@@ -1,27 +1,18 @@
-import { playlistData } from '../data/playlist.js';
-
 let bgAudio = null;
-let playlistAudio = null;
-let activeSong = null; // can be "bg" or a song object from playlistData
+let activeSong = null;
 let isMuted = false;
 let journeyStarted = false;
+let isExpanded = false;
 
-// Bernadya - Rabun Jauh
+const BASE = import.meta.env.BASE_URL;
 const BG_SONG = {
   id: 'bg',
-  title: "Rabun Jauh",
-  artist: "Bernadya",
-  audioUrl: "/music/Rabun Jauh.mp3",
-  fallbackUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+  title: "Bermuara",
+  artist: "Rizky Febian ft Mahalini",
+  audioUrl: `${BASE}music/Bermuara.mp3`,
 };
 
-// UI Elements
-let floatingPlayer = null;
-let playPauseBtn = null;
-let muteBtn = null;
-let disk = null;
-let marqueeText = null;
-
+let containerEl = null;
 const listeners = [];
 
 export function addAudioListener(callback) {
@@ -39,269 +30,219 @@ function notifyListeners() {
   updateUI();
 }
 
-function isPlaying() {
-  if (activeSong === 'bg' && bgAudio) {
-    return !bgAudio.paused;
-  } else if (activeSong && activeSong !== 'bg' && playlistAudio) {
-    return !playlistAudio.paused;
-  }
+export function isPlaying() {
+  if (bgAudio) return !bgAudio.paused;
   return false;
 }
 
-// Setup fallback audio source handling
-function setupFallback(audioElement, fallbackUrl) {
-  const errorHandler = () => {
-    console.warn(`Failed to play ${audioElement.src}. Trying fallback URL: ${fallbackUrl}`);
-    audioElement.removeEventListener('error', errorHandler);
-    
-    const wasPlaying = !audioElement.paused;
-    audioElement.src = fallbackUrl;
-    audioElement.load();
-    if (wasPlaying) {
-      audioElement.play().catch(err => {
-        console.error("Failed to play fallback audio:", err);
-      });
-    }
-  };
-  audioElement.addEventListener('error', errorHandler);
+function getActiveAudio() {
+  return bgAudio;
 }
 
 export function initAudioController() {
-  // Initialize background audio
   bgAudio = new Audio(BG_SONG.audioUrl);
   bgAudio.loop = true;
-  setupFallback(bgAudio, BG_SONG.fallbackUrl);
 
-  // Initialize playlist audio
-  playlistAudio = new Audio();
-  playlistAudio.addEventListener('ended', () => {
-    // When a playlist song finishes, automatically resume background music
-    resumeBackgroundMusic();
+  bgAudio.addEventListener('timeupdate', () => updateProgressUI());
+
+  bgAudio.addEventListener('error', (e) => {
+    console.error('Audio error:', e, bgAudio.error);
   });
 
-  // Listen for the custom journeyStarted event from opening screen
+  createFloatingPlayer();
+
   document.addEventListener('journeyStarted', () => {
-    journeyStarted = true;
-    createFloatingPlayer();
-    playBackgroundMusic();
+    if (!journeyStarted) {
+      journeyStarted = true;
+      playBackgroundMusic();
+    }
   });
 }
 
-function playBackgroundMusic() {
-  if (!journeyStarted) return;
-  
-  // Pause playlist audio if playing
-  if (playlistAudio) {
-    playlistAudio.pause();
-  }
-
+export function playBackgroundMusic() {
+  journeyStarted = true;
   activeSong = 'bg';
-  
+
   bgAudio.play()
-    .then(() => {
-      notifyListeners();
-    })
+    .then(() => notifyListeners())
     .catch(err => {
-      console.warn("Autoplay blocked or playback error, waiting for user click.", err);
+      console.warn("Playback waiting for user interaction.", err);
       notifyListeners();
     });
-}
-
-function resumeBackgroundMusic() {
-  if (!journeyStarted) return;
-  activeSong = 'bg';
-  bgAudio.play()
-    .then(() => {
-      notifyListeners();
-    })
-    .catch(err => {
-      console.error("Failed to resume background music:", err);
-    });
-}
-
-export function playPlaylistSong(songId) {
-  if (!journeyStarted) return;
-
-  const song = playlistData.find(s => s.id === songId);
-  if (!song) return;
-
-  // Pause background music
-  if (bgAudio) {
-    bgAudio.pause();
-  }
-
-  // Set source of playlist player
-  playlistAudio.src = song.audioUrl;
-  playlistAudio.load();
-  setupFallback(playlistAudio, song.fallbackUrl);
-
-  activeSong = song;
-  
-  playlistAudio.play()
-    .then(() => {
-      notifyListeners();
-    })
-    .catch(err => {
-      console.error(`Failed to play song ${song.title}:`, err);
-    });
-}
-
-export function pausePlaylistSong() {
-  if (playlistAudio) {
-    playlistAudio.pause();
-  }
-  notifyListeners();
-}
-
-export function togglePlaylistSong(songId) {
-  if (!journeyStarted) return;
-  
-  const song = playlistData.find(s => s.id === songId);
-  if (!song) return;
-
-  if (activeSong && activeSong.id === songId) {
-    if (playlistAudio.paused) {
-      if (bgAudio) bgAudio.pause();
-      playlistAudio.play().then(() => notifyListeners());
-    } else {
-      playlistAudio.pause();
-      // Resume background music instead of silence
-      resumeBackgroundMusic();
-    }
-  } else {
-    playPlaylistSong(songId);
-  }
 }
 
 export function toggleGlobalPlay() {
-  if (!journeyStarted) return;
+  journeyStarted = true;
+  if (!activeSong) {
+    playBackgroundMusic();
+    return;
+  }
 
-  if (activeSong === 'bg') {
-    if (bgAudio.paused) {
-      bgAudio.play().then(() => notifyListeners());
-    } else {
-      bgAudio.pause();
-      notifyListeners();
-    }
-  } else if (activeSong) {
-    if (playlistAudio.paused) {
-      playlistAudio.play().then(() => notifyListeners());
-    } else {
-      playlistAudio.pause();
-      notifyListeners();
-    }
+  if (bgAudio.paused) {
+    bgAudio.play().then(() => notifyListeners());
+  } else {
+    bgAudio.pause();
+    notifyListeners();
   }
 }
 
 export function toggleMute() {
   isMuted = !isMuted;
   if (bgAudio) bgAudio.muted = isMuted;
-  if (playlistAudio) playlistAudio.muted = isMuted;
   notifyListeners();
 }
 
-// UI creation and management
-function createFloatingPlayer() {
-  if (floatingPlayer) return;
+function formatTime(seconds) {
+  if (isNaN(seconds) || seconds < 0) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
 
-  floatingPlayer = document.createElement('div');
-  floatingPlayer.className = 'floating-audio-player glass-card';
-  floatingPlayer.id = 'floating-audio-player';
-  
-  floatingPlayer.innerHTML = `
-    <div class="audio-disk-container">
-      <div class="audio-disk" id="audio-disk">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <circle cx="12" cy="12" r="3"></circle>
+function createFloatingPlayer() {
+  if (containerEl) return;
+
+  containerEl = document.createElement('div');
+  containerEl.className = 'floating-music-container';
+  containerEl.id = 'floating-music-container';
+
+  containerEl.innerHTML = `
+    <!-- Compact Circular Floating Music Note Button -->
+    <button class="music-trigger-btn" id="music-trigger-btn" aria-label="Pemutar Musik" title="Pemutar Musik">
+      <div class="music-trigger-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
         </svg>
       </div>
-    </div>
-    <div class="audio-details">
-      <div class="audio-track-info">
-        <span class="audio-title-marquee" id="audio-title-marquee">Memulai Musik...</span>
+    </button>
+
+    <!-- Expanded Mini Player Card -->
+    <div class="mini-player-card" id="mini-player-card">
+      <div class="mini-player-header">
+        <div class="mini-player-brand">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          <span>Musik Perjalanan</span>
+        </div>
+        <button class="mini-player-close" id="mini-player-close" aria-label="Tutup Pemutar Musik">&times;</button>
       </div>
-      <div class="audio-controls">
-        <button class="audio-btn" id="audio-play-pause-btn" aria-label="Play/Pause">
-          <svg class="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-          <svg class="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display: none;">
-            <rect x="6" y="4" width="4" height="16"></rect>
-            <rect x="14" y="4" width="4" height="16"></rect>
-          </svg>
-        </button>
-        <button class="audio-btn" id="audio-mute-btn" aria-label="Mute/Unmute">
-          <svg class="unmute-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          </svg>
-          <svg class="mute-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <line x1="23" y1="9" x2="17" y2="15"></line>
-            <line x1="17" y1="9" x2="23" y2="15"></line>
-          </svg>
-        </button>
+
+      <div class="mini-player-body">
+        <div class="mini-player-track">
+          <span class="mini-track-title" id="mini-title">Bermuara</span>
+          <span class="mini-track-artist" id="mini-artist">Rizky Febian ft Mahalini</span>
+        </div>
+
+        <div class="mini-player-progress-container">
+          <span class="progress-time" id="progress-current">0:00</span>
+          <input type="range" class="mini-progress-bar" id="mini-progress" min="0" max="100" value="0" />
+          <span class="progress-time" id="progress-duration">0:00</span>
+        </div>
+
+        <div class="mini-player-controls">
+          <button class="mini-play-main-btn" id="mini-play-btn" title="Putar / Jeda">
+            <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <svg class="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+          </button>
+
+          <button class="mini-ctrl-btn" id="mini-mute-btn" title="Mute / Unmute">
+            <svg class="unmute-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+            <svg class="mute-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          </button>
+        </div>
       </div>
     </div>
   `;
 
-  document.body.appendChild(floatingPlayer);
+  document.body.appendChild(containerEl);
 
-  playPauseBtn = document.getElementById('audio-play-pause-btn');
-  muteBtn = document.getElementById('audio-mute-btn');
-  disk = document.getElementById('audio-disk');
-  marqueeText = document.getElementById('audio-title-marquee');
+  const triggerBtn = document.getElementById('music-trigger-btn');
+  const cardEl = document.getElementById('mini-player-card');
+  const closeBtn = document.getElementById('mini-player-close');
+  const playBtn = document.getElementById('mini-play-btn');
+  const muteBtn = document.getElementById('mini-mute-btn');
+  const progressBar = document.getElementById('mini-progress');
 
-  playPauseBtn.addEventListener('click', toggleGlobalPlay);
+  triggerBtn.addEventListener('click', () => {
+    isExpanded = !isExpanded;
+    cardEl.classList.toggle('active', isExpanded);
+    if (!activeSong) {
+      toggleGlobalPlay();
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    isExpanded = false;
+    cardEl.classList.remove('active');
+  });
+
+  playBtn.addEventListener('click', toggleGlobalPlay);
   muteBtn.addEventListener('click', toggleMute);
 
-  // Trigger initial UI update
+  progressBar.addEventListener('input', (e) => {
+    if (bgAudio && bgAudio.duration) {
+      bgAudio.currentTime = (e.target.value / 100) * bgAudio.duration;
+    }
+  });
+
   updateUI();
 }
 
+function updateProgressUI() {
+  const progressBar = document.getElementById('mini-progress');
+  const currentTimeEl = document.getElementById('progress-current');
+  const durationTimeEl = document.getElementById('progress-duration');
+
+  if (bgAudio && progressBar && currentTimeEl && durationTimeEl) {
+    const cur = bgAudio.currentTime || 0;
+    const dur = bgAudio.duration || 0;
+    currentTimeEl.textContent = formatTime(cur);
+    durationTimeEl.textContent = formatTime(dur);
+
+    if (dur > 0) {
+      progressBar.value = (cur / dur) * 100;
+    } else {
+      progressBar.value = 0;
+    }
+  }
+}
+
 function updateUI() {
-  if (!floatingPlayer) return;
+  if (!containerEl) return;
 
   const playing = isPlaying();
+  const triggerBtn = document.getElementById('music-trigger-btn');
+  const playBtn = document.getElementById('mini-play-btn');
+  const muteBtn = document.getElementById('mini-mute-btn');
 
-  // Disk rotation
-  if (playing) {
-    disk.classList.add('playing');
-  } else {
-    disk.classList.remove('playing');
+  if (triggerBtn) {
+    triggerBtn.classList.toggle('playing', playing);
   }
 
-  // Play/Pause button icons
-  const playIcon = playPauseBtn.querySelector('.play-icon');
-  const pauseIcon = playPauseBtn.querySelector('.pause-icon');
-  if (playing) {
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
-  } else {
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
+  if (playBtn) {
+    const playIcon = playBtn.querySelector('.play-icon');
+    const pauseIcon = playBtn.querySelector('.pause-icon');
+    if (playing) {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+    } else {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+    }
   }
 
-  // Mute button icons
-  const unmuteIcon = muteBtn.querySelector('.unmute-icon');
-  const muteIcon = muteBtn.querySelector('.mute-icon');
-  if (isMuted) {
-    unmuteIcon.style.display = 'none';
-    muteIcon.style.display = 'block';
-    muteBtn.classList.add('muted');
-  } else {
-    unmuteIcon.style.display = 'block';
-    muteIcon.style.display = 'none';
-    muteBtn.classList.remove('muted');
+  if (muteBtn) {
+    const unmuteIcon = muteBtn.querySelector('.unmute-icon');
+    const muteIcon = muteBtn.querySelector('.mute-icon');
+    if (isMuted) {
+      unmuteIcon.style.display = 'none';
+      muteIcon.style.display = 'block';
+    } else {
+      unmuteIcon.style.display = 'block';
+      muteIcon.style.display = 'none';
+    }
   }
 
-  // Track marquee title
-  if (activeSong === 'bg') {
-    marqueeText.textContent = `Musik Latar: ${BG_SONG.title} — ${BG_SONG.artist}`;
-  } else if (activeSong) {
-    marqueeText.textContent = `Memutar: ${activeSong.title} — ${activeSong.artist}`;
-  } else {
-    marqueeText.textContent = 'Musik Berhenti';
-  }
+  updateProgressUI();
 }

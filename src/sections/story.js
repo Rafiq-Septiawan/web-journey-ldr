@@ -6,34 +6,37 @@ export function initStory(containerId) {
 
   container.className = 'fade-up';
   
-  // Render paragraphs html
   const paragraphsHtml = storyData.paragraphs
-    .map(p => `<p class="story-para">${p}</p>`)
+    .map(p => `<p class="journey-paragraph">${p}</p>`)
     .join('');
 
-  // Render images html
   const imagesHtml = storyData.images
     .map(img => `
-      <div class="story-img-wrapper">
+      <div class="journey-img-card">
         <img src="${img.url}" alt="${img.caption}" />
-        <div class="story-img-caption">${img.caption}</div>
+        <div class="journey-img-caption">${img.caption}</div>
       </div>
     `)
     .join('');
 
   container.innerHTML = `
     <div class="container">
-      <h2 class="section-title">${storyData.title}</h2>
-      <p class="section-subtitle">${storyData.subtitle}</p>
+      <div class="section-header">
+        <div class="section-badge">DOKUMENTASI PERJALANAN</div>
+        <h2 class="section-title">${storyData.title}</h2>
+        <p class="section-subtitle">${storyData.subtitle}</p>
+      </div>
       
-      <div class="story-layout glass-card">
-        <div class="story-text-container">
+      <div class="corp-card journey-chapters-grid">
+        <div class="journey-text-block">
+          <h3 style="font-size: 1.5rem; color: var(--accent-cyan);">01 — Ringkasan Perjalanan</h3>
           ${paragraphsHtml}
         </div>
-        <div class="story-media">
+        <div class="journey-media-stack">
           ${imagesHtml}
         </div>
       </div>
     </div>
   `;
 }
+

@@ -1,6 +1,6 @@
 export const storyData = {
-  title: "Awal Mula Cerita Kita",
-  subtitle: "Bagaimana dua orang dari kota yang berbeda menemukan jalan untuk saling melengkapi.",
+  title: "Perjalanan",
+  subtitle: "Rangkaian perjalanan yang terbentuk dari waktu, jarak, pengalaman, dan berbagai momen yang telah dilalui.",
   paragraphs: [
     "Semua berawal dari sapaan singkat di dunia maya. Kita yang terpisah jarak ratusan kilometer tidak pernah membayangkan bahwa sebuah percakapan kasual akan tumbuh menjadi sesuatu yang begitu berarti. Dari obrolan ringan tentang hobi, bertukar lagu favorit, hingga akhirnya menyadari bahwa kita memiliki frekuensi yang sama.",
     "LDR (Long Distance Relationship) bukanlah hal yang mudah. Ada hari-hari di mana rindu terasa sangat berat, dan layar ponsel adalah satu-satunya jembatan penghubung kita. Namun, setiap pesan masuk, setiap panggilan suara di larut malam, dan setiap sesi video call selalu menjadi pengingat mengapa perjuangan ini layak dilakukan.",
@@ -17,3 +17,4 @@ export const storyData = {
     }
   ]
 };
+

@@ -20,6 +20,10 @@ export function initAbout(containerId) {
     `)
     .join('');
 
+  const descriptionHtml = Array.isArray(aboutData.description)
+    ? aboutData.description.map(p => `<p>${p}</p>`).join('')
+    : `<p>${aboutData.description}</p>`;
+
   container.innerHTML = `
     <div class="container">
       <div class="section-header">
@@ -30,11 +34,10 @@ export function initAbout(containerId) {
 
       <div class="about-grid">
         <div class="about-text-column corp-card">
-          <h3>Ruang Digital Dokumentasi Terstruktur</h3>
-          <p>${aboutData.description}</p>
-          <p>
-            Dengan arsitektur terstruktur, setiap momen tidak hanya disimpan sebagai memori biasa, melainkan didokumentasikan secara rapi agar dapat direfleksikan dan dibangun menjadi fondasi masa depan.
-          </p>
+          <h3>${aboutData.leftCardTitle || 'Tentang Trove'}</h3>
+          <div class="about-text-body">
+            ${descriptionHtml}
+          </div>
         </div>
 
         <div class="about-cards-column">

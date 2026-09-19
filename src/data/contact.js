@@ -1,6 +1,6 @@
 export const contactData = {
   title: "Hubungi Kami",
-  subtitle: "Untuk informasi atau komunikasi lebih lanjut mengenai WEB JOURNEY LDR.",
+  subtitle: "Untuk informasi atau komunikasi lebih lanjut mengenai Trove.",
   info: [
     {
       label: "Email Resmi",

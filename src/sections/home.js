@@ -50,104 +50,35 @@ export function initHome(containerId) {
       </div>
     </div>
 
-    <!-- Floating Vertical Hero Card (Left Side) -->
-    <div class="hero-float-card" id="hero-float-card">
+    <!-- Floating Minimalist Hero Content (Left Side - Floating directly on map) -->
+    <div class="hero-floating-content" id="hero-floating-content">
 
-      <!-- 1. Badge -->
-      <div class="hfc-badge">
-        <span class="hfc-badge-dot">✦</span>
-        <span class="hfc-badge-text">DUA KOTA, SATU CERITA</span>
+      <!-- 1. Minimal Badge -->
+      <div class="hero-minimal-badge">
+        <span class="hmb-dot">✦</span>
+        <span class="hmb-text">DUA KOTA, SATU CERITA</span>
       </div>
 
-      <!-- 2. Judul -->
-      <h1 class="hfc-title">
-        WEB JOURNEY <span class="hfc-title-ldr">LDR</span>
+      <!-- 2. Judul Utama -->
+      <h1 class="hero-minimal-title">
+        Trove
       </h1>
 
       <!-- 3. Deskripsi -->
-      <p class="hfc-desc">
-        Merawat hubungan jarak jauh antara dua kota—merekam cerita, momen, dan komunikasi yang menghubungkan ruang dan rasa.
+      <p class="hero-minimal-desc">
+        Berawal dari obrolan anonim di Telegram pada suatu malam, 
+        Rafiq dan Dwi yang terpisah oleh jarak Tangerang dan Pasaman Barat, 
+        perlahan menemukan cerita yang tak pernah mereka rencanakan.
       </p>
 
-      <!-- Divider tipis -->
-      <div class="hfc-divider"></div>
-
-      <!-- 4. Dua Profil Berdampingan -->
-      <div class="hfc-profiles">
-
-        <!-- Profil Rafiq -->
-        <div class="hfc-profile hfc-profile-cyan">
-          <div class="hfc-avatar hfc-avatar-cyan">
-            <img
-              src="${rafiqSrc}"
-              alt="Rafiq Septiawan"
-              class="hfc-avatar-photo"
-              onerror="if(!this.dataset.triedRel){this.dataset.triedRel='1';this.src='images/rafiq.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}"
-            />
-            <span class="hfc-avatar-fallback" style="display:none;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </span>
-          </div>
-          <div class="hfc-profile-info">
-            <span class="hfc-profile-loc hfc-loc-cyan">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              TANGERANG
-            </span>
-            <span class="hfc-profile-name">Rafiq Septiawan</span>
-          </div>
-        </div>
-
-        <!-- Profil Dwi -->
-        <div class="hfc-profile hfc-profile-pink">
-          <div class="hfc-avatar hfc-avatar-pink">
-            <img
-              src="${dwiSrc}"
-              alt="Dwi Mulya"
-              class="hfc-avatar-photo"
-              onerror="if(!this.dataset.triedRel){this.dataset.triedRel='1';this.src='images/dwi.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}"
-            />
-            <span class="hfc-avatar-fallback" style="display:none;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </span>
-          </div>
-          <div class="hfc-profile-info">
-            <span class="hfc-profile-loc hfc-loc-pink">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              PASAMAN BARAT
-            </span>
-            <span class="hfc-profile-name">Dwi Mulya</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 5. Keterangan Metadata Stats Bar -->
-      <div class="hfc-stats-bar">
-        <div class="hfc-stat-item">
-          <span class="hfc-stat-label">JARAK</span>
-          <span class="hfc-stat-val">±1.035 KM</span>
-        </div>
-        <div class="hfc-stat-divider"></div>
-        <div class="hfc-stat-item">
-          <span class="hfc-stat-label">TERHUBUNG MELALUI</span>
-          <span class="hfc-stat-val">Chat & Call</span>
-        </div>
-        <div class="hfc-stat-divider"></div>
-        <div class="hfc-stat-item">
-          <span class="hfc-stat-label">EST. PERJALANAN</span>
-          <span class="hfc-stat-val">±36 Jam</span>
-        </div>
-      </div>
-
-      <!-- 6. Dua Tombol -->
-      <div class="hfc-buttons">
-        <a href="#journey" class="hfc-btn hfc-btn-primary" id="hero-explore-btn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-          <span>Jelajahi</span>
-        </a>
-        <a href="#profile" class="hfc-btn hfc-btn-secondary">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          <span>Profil</span>
+      <!-- 4. Single Minimal CTA Button -->
+      <div class="hero-minimal-actions">
+        <a href="#journey" class="hero-cta-btn" id="hero-explore-btn">
+          <span>Lihat Cerita Kami</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="cta-arrow">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </a>
       </div>
 
@@ -170,6 +101,7 @@ export function initHome(containerId) {
 
 let heroMapInstance = null;
 let avatarAnimFrameId = null;
+let mapAnimFrameId = null;
 
 function initLeafletHeroMap(rafiqSrc, dwiSrc) {
   const mapElement = document.getElementById('hero-map');
@@ -195,17 +127,21 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
     mapElement._leaflet_id = null;
   }
 
-  // Stop any previous animation frame
+  // Stop any previous animation frames
   if (avatarAnimFrameId) {
     cancelAnimationFrame(avatarAnimFrameId);
     avatarAnimFrameId = null;
+  }
+  if (mapAnimFrameId) {
+    cancelAnimationFrame(mapAnimFrameId);
+    mapAnimFrameId = null;
   }
 
   // MANDATORY EXACT COORDINATES
   const tangerang = [-6.2212966, 106.6773168];
   const pasamanBarat = [0.0505362, 99.7887878];
 
-  // Initialize Leaflet Map Engine
+  // Initialize Leaflet Map Engine with Fractional Zoom (zoomSnap: 0) to avoid tile reloading flicker
   const map = L.map('hero-map', {
     zoomControl: false,
     dragging: false,
@@ -215,8 +151,8 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
     touchZoom: false,
     keyboard: false,
     attributionControl: false,
-    zoomSnap: 0.05,
-    zoomDelta: 0.2
+    zoomSnap: 0,
+    zoomDelta: 0.25
   });
 
   heroMapInstance = map;
@@ -239,12 +175,11 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
       return;
     }
 
-    // Desktop: vertical card is on the left side (~440px wide + 24px margin)
-    // Reserve left padding so route is centered in the remaining right space
-    // Extra bottom padding shifts the view up so Tangerang stays in the centre-right area
-    const cardEl = document.querySelector('.hero-float-card');
-    const cardRect = cardEl ? cardEl.getBoundingClientRect() : null;
-    const leftReserve = cardRect ? (cardRect.right - 80) : 360;
+    // Desktop: floating content is on the left side
+    // Reserve minimal left padding so route is centered in the remaining space
+    const contentEl = document.querySelector('.hero-floating-content');
+    const contentRect = contentEl ? contentEl.getBoundingClientRect() : null;
+    const leftReserve = contentRect ? Math.min(260, Math.max(160, contentRect.right - 120)) : 220;
 
     heroMapInstance.fitBounds([tangerang, pasamanBarat], {
       paddingTopLeft: [leftReserve, 80],
@@ -257,9 +192,12 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
 
 
   // 1. Esri World Imagery (Realistic Dark Satellite Map Tile Layer)
+  // Options: updateWhenZooming: false + keepBuffer: 6 prevent white/gray flicker when scroll-zooming
   const satelliteTiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 18,
-    attribution: 'Tiles &copy; Esri'
+    attribution: 'Tiles &copy; Esri',
+    updateWhenZooming: false,
+    keepBuffer: 6
   }).addTo(map);
 
   // Fallback tile layer if satellite tile fails
@@ -268,7 +206,9 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
       map._hasFallbackTiles = true;
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         maxZoom: 18,
-        subdomains: 'abcd'
+        subdomains: 'abcd',
+        updateWhenZooming: false,
+        keepBuffer: 6
       }).addTo(map);
     }
   });
@@ -350,11 +290,10 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
       <div class="avatar-marker-wrapper rafiq-avatar-wrapper">
         <div class="avatar-glow-ring rafiq-glow"></div>
         <img src="${rafiqSrc}" alt="Rafiq Septiawan" class="avatar-img rafiq-img" onerror="if(!this.dataset.triedRel){this.dataset.triedRel='1';this.src='images/rafiq.jpg';}" />
-        <div class="avatar-name-badge rafiq-badge">Rafiq</div>
       </div>
     `,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
+    iconSize: [56, 56],
+    iconAnchor: [28, 28]
   });
 
   const dwiIcon = L.divIcon({
@@ -363,11 +302,10 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
       <div class="avatar-marker-wrapper dwi-avatar-wrapper">
         <div class="avatar-glow-ring dwi-glow"></div>
         <img src="${dwiSrc}" alt="Dwi Mulya" class="avatar-img dwi-img" onerror="if(!this.dataset.triedRel){this.dataset.triedRel='1';this.src='images/dwi.jpg';}" />
-        <div class="avatar-name-badge dwi-badge">Dwi</div>
       </div>
     `,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
+    iconSize: [56, 56],
+    iconAnchor: [28, 28]
   });
 
   const heartIcon = L.divIcon({
@@ -409,11 +347,79 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
     console.log('Using fallback road route polyline:', err);
   });
 
-  // Auto handle resize — invalidate size and refit the route to the (re-measured) card
+  // Scroll-Driven PAN-ONLY Map Movement (Fixed Zoom Level, Smooth Lerp Pan)
+  let targetProgress = 0;
+  let currentProgress = 0;
+
+  const getScrollProgress = () => {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const currentScroll = Math.max(0, window.scrollY);
+    return Math.min(1, Math.max(0, currentScroll / maxScroll));
+  };
+
+  targetProgress = getScrollProgress();
+  currentProgress = targetProgress;
+
+  // Lightweight scroll listener that simply assigns target progress value
+  const onScrollUpdateTarget = () => {
+    targetProgress = getScrollProgress();
+  };
+
+  // Continuous animation loop using rAF (60fps lerp easing decoupled from scroll event frequency)
+  const updateMapLoop = () => {
+    if (!heroMapInstance) return;
+
+    // Linear interpolation (lerp) towards target progress for ultra-smooth fluid easing
+    const diff = targetProgress - currentProgress;
+    if (Math.abs(diff) > 0.0001) {
+      currentProgress += diff * 0.08;
+    } else {
+      currentProgress = targetProgress;
+    }
+
+    const isMobile = window.innerWidth <= 768;
+    // 1. FIXED ZOOM LEVEL: No zoom out or zoom changes during scroll
+    const fixedZoom = isMobile ? 4.8 : 5.8;
+
+    // 2. PAN-ONLY: Smoothly interpolate map center Lat/Lng from initial focus to target area
+    const startLat = -3.085;
+    const startLng = 103.233;
+    const targetLat = -0.5;
+    const targetLng = 114.5;
+
+    const currentLat = startLat + currentProgress * (targetLat - startLat);
+    const currentLng = startLng + currentProgress * (targetLng - startLng);
+
+    // Pan map to new center position keeping zoom level strictly constant
+    heroMapInstance.setView([currentLat, currentLng], fixedZoom, { animate: false });
+
+    // Smoothly Fade Out / Fade In avatar markers, polyline route & city labels when scrolled past hero section
+    const mapContainer = document.getElementById('hero-map');
+    if (mapContainer) {
+      if (currentProgress > 0.12) {
+        mapContainer.classList.add('map-markers-hidden');
+      } else {
+        mapContainer.classList.remove('map-markers-hidden');
+      }
+    }
+
+    mapAnimFrameId = requestAnimationFrame(updateMapLoop);
+  };
+
+  // Start continuous rAF animation loop
+  mapAnimFrameId = requestAnimationFrame(updateMapLoop);
+
+  if (window._heroMapScrollHandler) {
+    window.removeEventListener('scroll', window._heroMapScrollHandler);
+  }
+  window._heroMapScrollHandler = onScrollUpdateTarget;
+  window.addEventListener('scroll', onScrollUpdateTarget, { passive: true });
+
+  // Auto handle resize — invalidate size and update view bounds
   const triggerResize = () => {
     if (!heroMapInstance) return;
     heroMapInstance.invalidateSize();
-    applyResponsiveMapView();
+    targetProgress = getScrollProgress();
   };
 
   window.addEventListener('resize', triggerResize);
@@ -421,7 +427,6 @@ function initLeafletHeroMap(rafiqSrc, dwiSrc) {
   setTimeout(triggerResize, 50);
   setTimeout(triggerResize, 200);
   setTimeout(triggerResize, 500);
-
 }
 
 // Draw Latitude & Longitude Grid Lines over Indonesia Map
@@ -526,9 +531,9 @@ function getDistanceKm(p1, p2) {
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((p1[0] * Math.PI) / 180) *
-      Math.cos((p2[0] * Math.PI) / 180) *
-      Math.sin(dLng / 2) *
-      Math.sin(dLng / 2);
+    Math.cos((p2[0] * Math.PI) / 180) *
+    Math.sin(dLng / 2) *
+    Math.sin(dLng / 2);
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 

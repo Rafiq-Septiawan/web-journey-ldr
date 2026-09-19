@@ -4,7 +4,14 @@ export function initNavbar() {
   header.id = 'main-navbar';
   header.innerHTML = `
     <div class="navbar-inner">
-      <div class="nav-left"></div>
+      <div class="nav-left">
+        <a href="#home" class="nav-brand">
+          <div class="nav-brand-text">
+            <span class="nav-brand-name">Trove</span>
+            <span class="nav-brand-tag">A Long Distance Journal</span>
+          </div>
+        </a>
+      </div>
       <ul class="nav-menu" id="desktop-nav-links">
         <li><a href="#home" class="nav-link active">Beranda</a></li>
         <li><a href="#about" class="nav-link">Tentang</a></li>
@@ -14,11 +21,6 @@ export function initNavbar() {
         <li><a href="#gallery" class="nav-link">Dokumentasi</a></li>
         <li><a href="#contact" class="nav-link">Kontak</a></li>
       </ul>
-
-      <a href="#journey" class="btn btn-primary nav-cta" id="nav-cta-btn">
-        Jelajahi Perjalanan
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-      </a>
 
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Buka Menu Navigasi">
         <span></span>
@@ -36,10 +38,9 @@ export function initNavbar() {
       <!-- Drawer Header -->
       <div class="drawer-header">
         <div class="drawer-brand">
-          <div class="nav-logo-icon">W</div>
           <div class="nav-brand-text">
-            <span class="nav-brand-name">WEB JOURNEY</span>
-            <span class="nav-brand-tag">LDR</span>
+            <span class="nav-brand-name">Trove</span>
+            <span class="nav-brand-tag">A Long Distance Journal</span>
           </div>
         </div>
         <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Tutup Menu Navigasi">

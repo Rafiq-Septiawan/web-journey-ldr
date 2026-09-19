@@ -1,31 +1,29 @@
 export const profileData = {
-  title: "Profil",
-  subtitle: "Dua lokasi, satu perjalanan yang terus berjalan.",
+  title: "TENTANG KAMI",
+  subtitle: "Dua kota, satu cerita yang dimulai dari sebuah obrolan anonim.",
   connection: {
     status: "TERHUBUNG",
     mode: "HUBUNGAN JARAK JAUH",
     metricLabel: "JARAK",
-    metricValue: "Kota Tangerang — Pasaman Barat",
+    metricValue: "Tangerang — Pasaman Barat",
     subtext: "Terpisah jarak, terhubung tujuan."
   },
   profiles: [
     {
       id: "01",
-      tag: "PROFIL 01",
       name: "Rafiq Septiawan, S.Kom",
-      role: "Pengelola Sistem & Pengembang Digital",
-      location: "Kota Tangerang, Banten",
-      bio: "Bertanggung jawab atas pengelolaan sistem digital, dokumentasi teknis, dan perancangan platform perjalanan.",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+      subtitle: "26 September 2004",
+      location: "Tangerang, Banten",
+      bio: "Seseorang yang awalnya hanya menemukan teman ngobrol secara anonim, lalu tanpa sadar menemukan seseorang yang ingin terus ada dalam hidupnya.",
+      avatar: "images/rs.jpg"
     },
     {
       id: "02",
-      tag: "PROFIL 02",
-      name: "Dwi Mulya Sugih Rahayu",
-      role: "Pengarah Kreatif & Kurator Memori",
+      name: "Dwi Mulya Sugih Rahayu, S.E",
+      subtitle: "12 Desember 2006",
       location: "Pasaman Barat, Sumatera Barat",
-      bio: "Memberikan arahan inspirasi visual, kurasi memori, serta mendukung penyusunan arsip milestone perjalanan.",
-      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80"
+      bio: "Seseorang yang awalnya hanya menjadi teman dalam sebuah obrolan anonim, kemudian menjadi bagian penting dari perjalanan yang terus berjalan sampai hari ini.",
+      avatar: "images/dw.jpg"
     }
   ]
 };

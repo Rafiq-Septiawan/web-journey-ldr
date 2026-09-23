@@ -1,30 +1,33 @@
 export const profileData = {
-  title: "TENTANG KAMI",
+  title: "Tentang Kami",
   subtitle: "Dua kota, satu cerita yang dimulai dari sebuah obrolan anonim.",
   connection: {
     status: "TERHUBUNG",
     mode: "HUBUNGAN JARAK JAUH",
-    metricLabel: "JARAK",
-    metricValue: "Tangerang — Pasaman Barat",
-    subtext: "Terpisah jarak, terhubung tujuan."
+    distance: "±1.000 KM",
+    communication: "Chat, Voice Call & Video Call",
+    startDate: "8 Desember 2024"
   },
   profiles: [
     {
       id: "01",
       name: "Rafiq Septiawan, S.Kom",
-      subtitle: "26 September 2004",
+      birthDate: "26 September 2004",
       location: "Tangerang, Banten",
-      bio: "Seseorang yang awalnya hanya menemukan teman ngobrol secara anonim, lalu tanpa sadar menemukan seseorang yang ingin terus ada dalam hidupnya.",
-      avatar: "images/rs.jpg"
+      bio: "Suka mencari kesibukan, mulai dari ngegame, koleksi mainan, sampai mencoba berbagai hal yang bikin hari-hari tetap seru.",
+      quote: "Terima kasih sudah menjadi bagian penting dari cerita ini.",
+      avatar: "images/rafiq.jpg"
     },
     {
       id: "02",
       name: "Dwi Mulya Sugih Rahayu, S.E",
-      subtitle: "12 Desember 2006",
+      birthDate: "12 Desember 2006",
       location: "Pasaman Barat, Sumatera Barat",
-      bio: "Seseorang yang awalnya hanya menjadi teman dalam sebuah obrolan anonim, kemudian menjadi bagian penting dari perjalanan yang terus berjalan sampai hari ini.",
+      bio: "Suka bercerita, menghabiskan waktu bersama teman, jajan, berkarya, dan mencoba berbagai hal baru yang menarik.",
+      quote: "Senang bisa menjalani cerita ini bersama kamu.",
       avatar: "images/dw.jpg"
     }
   ]
 };
+
 

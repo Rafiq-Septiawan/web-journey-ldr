@@ -10,18 +10,18 @@ export const storyData = {
     },
     {
       num: "02",
-      title: "Semakin Dekat",
+      title: "Mulai Saling Hadir",
       body: "Setelahnya, obrolan kami berlanjut dan semakin sering. Kami mulai saling mengabari, berbagi cerita, dan perlahan merasa nyaman satu sama lain. Tanpa sadar, mulai muncul rasa yang berbeda."
     },
     {
       num: "03",
-      title: "Menjalani LDR",
-      body: "Pada 8 Desember 2024, kami memutuskan untuk menjalani hubungan. Chat, panggilan suara, dan video call menjadi keseharian kami untuk tetap saling hadir meski di dua kota berbeda."
+      title: "Memilih untuk Bersama",
+      body: "Pada 8 Desember 2024, kami memutuskan untuk menjalani hubungan. Sejak saat itu, chat, panggilan suara, dan berbagai cara sederhana menjadi bagian dari keseharian kami untuk tetap saling hadir."
     },
     {
       num: "04",
-      title: "Terus Berjalan",
-      body: "Sampai hari ini, kami belum pernah bertemu langsung. Namun cerita kami masih terus berjalan—dengan segala momen sederhana, jarak, rindu, tawa, dan hal-hal kecil yang kami lewati bersama."
+      title: "Cerita yang Masih Berjalan",
+      body: "Sampai hari ini, kami belum pernah bertemu secara langsung. Namun, cerita kami masih terus berjalan—dengan berbagai obrolan, panggilan, video call, tawa, rindu, dan hal-hal kecil yang kami lewati bersama."
     }
   ],
 
@@ -40,17 +40,17 @@ export const storyData = {
     {
       icon: "phone",
       title: "Banyak Panggilan",
-      desc: "Suara yang membuat jarak terasa sedikit lebih dekat."
+      desc: "Suara yang menemani hari-hari meski kami berada di dua kota berbeda."
     },
     {
       icon: "video",
       title: "Banyak Momen",
-      desc: "Meski hanya lewat layar, tetap ada momen yang berarti."
+      desc: "Dari chat, voice call, sampai video call, semuanya menjadi bagian dari cerita kami."
     },
     {
       icon: "heart",
-      title: "Satu Tujuan",
-      desc: "Terus menjalani cerita ini bersama."
+      title: "Tetap Bersama",
+      desc: "Jarak masih ada, tapi cerita kami masih terus berjalan."
     }
   ]
 };

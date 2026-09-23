@@ -9,9 +9,10 @@ export function initGallery(containerId) {
   const docsHtml = galleryData
     .map((item, idx) => `
       <div class="doc-item" data-index="${idx}">
-        <img src="${item.src}" alt="${item.caption}" loading="lazy" />
+        <img src="${item.src}" alt="${item.title || item.caption}" loading="lazy" />
         <div class="doc-overlay">
-          <p class="doc-caption">${item.caption}</p>
+          ${item.title ? `<h3 class="doc-title">${item.title}</h3>` : ''}
+          <p class="doc-caption">${item.description || item.caption}</p>
         </div>
       </div>
     `)
@@ -22,7 +23,7 @@ export function initGallery(containerId) {
       <div class="section-header">
         <div class="section-badge">ARSIP VISUAL</div>
         <h2 class="section-title">Dokumentasi</h2>
-        <p class="section-subtitle">Kumpulan momen yang menjadi bagian dari perjalanan.</p>
+        <p class="section-subtitle">Galeri momen penting dan catatan perjalanan hidup kami.</p>
       </div>
 
       <div class="documentation-grid">
@@ -38,9 +39,11 @@ export function initGallery(containerId) {
       const idx = item.getAttribute('data-index');
       const data = galleryData[idx];
       if (window.openLightbox) {
-        window.openLightbox(data.src, data.caption);
+        const fullCaption = data.title ? `${data.title} — ${data.description || data.caption}` : data.caption;
+        window.openLightbox(data.src, fullCaption);
       }
     });
   });
 }
+
 
